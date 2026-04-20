@@ -1,0 +1,923 @@
+/* ==============================
+   SMART TASK TRACKER — FOREST THEME
+   ============================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+/* ——— Reset & Base ——— */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Forest palette — pure black, zero blue */
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-card: #141414;
+  --bg-card-hover: #1a1a1a;
+  --bg-input: #0d0d0d;
+  --border: #2a2a2a;
+  --border-light: #3a3a3a;
+
+  --text-primary: #e2e2e2;
+  --text-secondary: #999999;
+  --text-muted: #666666;
+
+  /* Green accents */
+  --accent: #2e7d32;
+  --accent-light: #66bb6a;
+  --accent-lighter: #81c784;
+  --accent-glow: rgba(46, 125, 50, 0.35);
+  --accent-soft: rgba(102, 187, 106, 0.12);
+
+  /* Semantic */
+  --success: #4caf50;
+  --warning: #ff9800;
+  --danger: #ef5350;
+  --info: #81c784;
+
+  /* Spacing */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 30px var(--accent-glow);
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ——— Ambient Background ——— */
+.bg-shapes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.08;
+}
+
+.shape-1 {
+  width: 600px;
+  height: 600px;
+  background: var(--accent);
+  top: -150px;
+  right: -150px;
+  animation: float 22s ease-in-out infinite;
+}
+
+.shape-2 {
+  width: 450px;
+  height: 450px;
+  background: #1b5e20;
+  bottom: -100px;
+  left: -100px;
+  animation: float 28s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+  width: 350px;
+  height: 350px;
+  background: #388e3c;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -40px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+/* ——— App Layout ——— */
+.app {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ——— Header ——— */
+.app-header {
+  text-align: center;
+  padding: 48px 0 36px;
+}
+
+.header-content {
+  animation: fadeInDown 0.6s ease;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.logo-icon {
+  font-size: 2.2rem;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.logo h1 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-light), var(--accent-lighter), #a5d6a7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-top: 10px;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ——— Main Content ——— */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-bottom: 48px;
+}
+
+/* ==============================
+   TASK FORM CARD
+   ============================== */
+.task-form-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: fadeInUp 0.5s ease;
+}
+
+.task-form-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-light);
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.25s;
+}
+
+.form-header:hover {
+  background: var(--bg-card-hover);
+}
+
+.form-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-icon {
+  font-size: 1.2rem;
+  color: var(--accent-light);
+}
+
+.form-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chevron {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: transform 0.35s ease;
+}
+
+.chevron.expanded {
+  transform: rotate(180deg);
+}
+
+/* ——— Form Layout ——— */
+.task-form {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 24px;
+}
+
+.task-form.expanded {
+  max-height: 600px;
+  padding: 0 24px 28px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.required {
+  color: var(--danger);
+}
+
+/* ——— Inputs ——— */
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  line-height: 1.6;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  outline: none;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent-light);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+input.error {
+  border-color: var(--danger);
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 76px;
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999999' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+/* ——— Checkbox ——— */
+.checkbox-group {
+  display: flex;
+  align-items: flex-end;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  padding: 12px 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-light);
+  cursor: pointer;
+}
+
+/* ——— Add Button ——— */
+.btn-add {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--accent), #388e3c);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn-add:hover {
+  transform: scale(1.05) translateY(-1px);
+  box-shadow: var(--shadow-glow);
+  background: linear-gradient(135deg, #388e3c, #43a047);
+}
+
+.btn-add:active {
+  transform: scale(1.02) translateY(0);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* ==============================
+   STATS BAR
+   ============================== */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  animation: fadeInUp 0.5s ease 0.1s both;
+  margin-bottom: 8px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.15);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-light);
+}
+
+.stat-completed .stat-number { color: var(--success); }
+.stat-pending .stat-number { color: var(--warning); }
+.stat-overdue .stat-number { color: var(--danger); }
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ==============================
+   CONTROLS BAR (Search + Filters)
+   ============================== */
+.controls-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeInUp 0.5s ease 0.15s both;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+}
+
+.search-input {
+  padding-left: 44px !important;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 8px 18px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filter-tab:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border-light);
+  transform: scale(1.05);
+}
+
+.filter-tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  box-shadow: 0 2px 12px var(--accent-glow);
+}
+
+/* ==============================
+   TASK LIST
+   ============================== */
+.task-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 4px;
+  animation: fadeInUp 0.5s ease 0.2s both;
+}
+
+/* ——— Individual Task Item ——— */
+.task-item {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  animation: slideIn 0.3s ease;
+}
+
+.task-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-light);
+}
+
+/* Priority accent bar (left edge) */
+.priority-bar {
+  width: 4px;
+  flex-shrink: 0;
+  border-radius: 4px 0 0 4px;
+}
+
+.task-content {
+  flex: 1;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.task-top-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.task-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ——— Check Button ——— */
+.check-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.25s ease;
+}
+
+.check-btn:hover {
+  border-color: var(--accent-light);
+  background: var(--accent-soft);
+  transform: scale(1.05);
+}
+
+.check-btn.checked {
+  background: var(--accent-light);
+  border-color: var(--accent-light);
+  color: white;
+}
+
+/* ——— Task Text ——— */
+.task-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  word-break: break-word;
+  line-height: 1.5;
+}
+
+.task-description {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* Completed state */
+.task-item.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.task-item.completed .task-description {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.task-item.completed {
+  opacity: 0.65;
+}
+
+/* Overdue state */
+.task-item.overdue {
+  border-color: rgba(239, 83, 80, 0.35);
+  background: linear-gradient(135deg, var(--bg-card), rgba(239, 83, 80, 0.06));
+}
+
+/* Important state */
+.task-item.important {
+  border-color: rgba(255, 152, 0, 0.35);
+}
+
+/* ——— Action Buttons ——— */
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-icon-action {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  transition: all 0.25s ease;
+}
+
+.btn-icon-action:hover {
+  background: var(--accent-soft);
+  color: var(--accent-light);
+  transform: scale(1.05);
+}
+
+.btn-icon-action.active-star {
+  color: var(--warning);
+}
+
+.btn-icon-action.active-star:hover {
+  background: rgba(255, 152, 0, 0.12);
+  color: var(--warning);
+}
+
+.btn-delete:hover {
+  background: rgba(239, 83, 80, 0.15);
+  color: var(--danger);
+}
+
+/* ——— Task Meta Badges ——— */
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid;
+  font-family: inherit;
+  letter-spacing: 0.2px;
+}
+
+.priority-badge {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.priority-badge:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-sm);
+}
+
+.status-badge {
+  background: var(--accent-soft);
+  color: var(--accent-light);
+  border-color: rgba(102, 187, 106, 0.25);
+}
+
+.status-done {
+  background: rgba(76, 175, 80, 0.12);
+  color: var(--success);
+  border-color: rgba(76, 175, 80, 0.3);
+}
+
+.status-pending {
+  background: rgba(255, 152, 0, 0.1);
+  color: var(--warning);
+  border-color: rgba(255, 152, 0, 0.25);
+}
+
+.date-badge {
+  background: rgba(129, 199, 132, 0.1);
+  color: var(--info);
+  border-color: rgba(129, 199, 132, 0.25);
+}
+
+.overdue-badge {
+  background: rgba(239, 83, 80, 0.1) !important;
+  color: var(--danger) !important;
+  border-color: rgba(239, 83, 80, 0.3) !important;
+}
+
+.overdue-label {
+  font-weight: 700;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ==============================
+   EMPTY STATE
+   ============================== */
+.empty-state {
+  text-align: center;
+  padding: 64px 20px;
+  animation: fadeInUp 0.5s ease;
+}
+
+.empty-icon {
+  font-size: 3.2rem;
+  margin-bottom: 14px;
+}
+
+.empty-text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ==============================
+   LOADING STATE
+   ============================== */
+.loading-state {
+  text-align: center;
+  padding: 64px 20px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.spinner {
+  width: 38px;
+  height: 38px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent-light);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==============================
+   ERROR STATE
+   ============================== */
+.error-state {
+  text-align: center;
+  padding: 44px 20px;
+  color: var(--danger);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.btn-retry {
+  padding: 10px 28px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.25s ease;
+}
+
+.btn-retry:hover {
+  background: #388e3c;
+  transform: scale(1.05);
+}
+
+/* ==============================
+   TOAST NOTIFICATIONS
+   ============================== */
+.toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  padding: 14px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
+  box-shadow: var(--shadow-lg);
+}
+
+.toast-success {
+  background: linear-gradient(135deg, #1b5e20, var(--accent));
+  color: #c8e6c9;
+  border: 1px solid rgba(102, 187, 106, 0.3);
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #7f1d1d, #b71c1c);
+  color: #ffcdd2;
+  border: 1px solid rgba(239, 83, 80, 0.3);
+}
+
+/* ==============================
+   FOOTER
+   ============================== */
+.app-footer {
+  text-align: center;
+  padding: 28px 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+/* ==============================
+   ANIMATIONS
+   ============================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+@media (max-width: 600px) {
+  .app {
+    padding: 0 16px;
+  }
+
+  .logo h1 {
+    font-size: 1.6rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-tabs {
+    justify-content: center;
+  }
+
+  .task-top-row {
+    flex-direction: column;
+  }
+
+  .task-actions {
+    align-self: flex-end;
+  }
+}
