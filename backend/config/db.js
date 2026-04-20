@@ -5,10 +5,12 @@ const connectDB = async () => {
     const conn = await mongoose.connect(
       process.env.MONGO_URI || "mongodb://127.0.0.1:27017/tasktracker"
     );
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`❌ MongoDB Connection Error: ${error.message}`);
-    process.exit(1);
+    console.error(`MongoDB Connection Error: ${error.message}`);
+    // Retry after 5 seconds instead of crashing
+    console.log("Retrying connection in 5 seconds...");
+    setTimeout(connectDB, 5000);
   }
 };
 
