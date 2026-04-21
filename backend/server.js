@@ -19,6 +19,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/tasks", require("./routes/taskRoutes"));
+app.use("/api/contacts", require("./routes/contactRoutes"));
 
 // Health check
 app.get("/", (req, res) => {

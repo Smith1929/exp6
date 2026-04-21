@@ -890,6 +890,178 @@ select {
 }
 
 /* ==============================
+   TAB NAVIGATION
+   ============================== */
+.tab-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+  animation: fadeInUp 0.5s ease 0.2s both;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--accent), #388e3c);
+  border-color: var(--accent);
+  color: white;
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.tab-icon {
+  font-size: 1.05rem;
+}
+
+/* ==============================
+   CONTACT FORM
+   ============================== */
+.contact-form-card .form-header-static {
+  cursor: default;
+}
+
+.contact-form-card .form-header-static:hover {
+  background: transparent;
+}
+
+.contact-form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.contact-form-actions .btn-add {
+  flex: 1;
+}
+
+.btn-cancel {
+  background: linear-gradient(135deg, #424242, #616161) !important;
+}
+
+.btn-cancel:hover {
+  background: linear-gradient(135deg, #616161, #757575) !important;
+  box-shadow: 0 0 20px rgba(97, 97, 97, 0.3) !important;
+}
+
+/* ==============================
+   CONTACT LIST
+   ============================== */
+.contact-list {
+  animation: fadeInUp 0.5s ease 0.1s both;
+}
+
+.contact-list-header {
+  margin-bottom: 18px;
+}
+
+.contact-list-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  animation: slideIn 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-light);
+}
+
+.contact-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #388e3c);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 5px;
+  word-break: break-word;
+}
+
+.contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.detail-icon {
+  color: var(--accent-light);
+  font-size: 0.9rem;
+}
+
+.contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ==============================
    RESPONSIVE
    ============================== */
 @media (max-width: 600px) {
@@ -919,5 +1091,28 @@ select {
 
   .task-actions {
     align-self: flex-end;
+  }
+
+  .tab-nav {
+    gap: 6px;
+  }
+
+  .tab-btn {
+    padding: 10px 20px;
+    font-size: 0.84rem;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .contact-actions {
+    align-self: flex-end;
+  }
+
+  .contact-form-actions {
+    flex-direction: column;
   }
 }
